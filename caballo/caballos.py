@@ -1,8 +1,9 @@
 import random
 from abc import ABC, abstractmethod 
-from nodo.Nodo import Nodo
+from nodo.Nodo import NodoConcreto
 
-class Caballo(Nodo):
+
+class Caballo(NodoConcreto):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.movimientos = [
