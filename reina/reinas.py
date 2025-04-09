@@ -13,23 +13,39 @@ def resolver_n_reinas_con_nodos(n):
         if nodo_actual.nivel == n:
             return nodo_actual.estado
 
-        nodo_actual.generar_hijos(n)
-        pila.extend(nodo_actual.hijos)
+        for col in range(n):
+            if es_valido(nodo_actual.estado, nodo_actual.nivel, col):
+                nuevo_estado = [fila[:] for fila in nodo_actual.estado]
+                nuevo_estado[nodo_actual.nivel][col] = 1
+                pila.append(NodoPolinomio(nuevo_estado, nodo_actual.nivel + 1))
 
-    return None
+        solucion = nodo_actual.estado
+        imprimir_solucion(solucion)
+        return solucion
 
+    def es_valido(estado, fila, col):
+        for i in range(fila):
+            if estado[i][col] == 1 or \
+               (col - (fila - i) >= 0 and estado[i][col - (fila - i)] == 1) or \
+               (col + (fila - i) < len(estado) and estado[i][col + (fila - i)] == 1):
+                return False
+        return True
 
-def n_reinas():
-    try:
-        n = int(input("Introduce el número de reinas (y el tamaño del tablero): "))
-        solucion = resolver_n_reinas_con_nodos(n)
-        if solucion:
-            for fila in solucion:
-                print(fila)
-        else:
-            print(0)
-    except ValueError:
-        print("Por favor, introduce un número válido.")
+    def imprimir_solucion(estado):
+        print("Solución encontrada:")
+        for fila in estado:
+            print(" ".join("Q" if x == 1 else "." for x in fila))
 
 if __name__ == "__main__":
-    n_reinas()
+    try:
+        n = int(input("Introduce el número de reinas: "))
+        if n <= 0:
+            print("El número de reinas debe ser mayor que 0.")
+        else:
+            solucion = resolver_n_reinas_con_nodos(n)
+        if solucion:
+            print("Se encontró una solución.")
+        else:
+            print("No se encontró solución.")
+    except ValueError:
+        print("Por favor, introduce un número entero válido.")

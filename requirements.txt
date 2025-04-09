@@ -1,7 +1,1 @@
-flask
-flask-wtf
 sqlalchemy
-flask-sqlalchemy
-wtforms
-flask-migrate
-PyQt6
