@@ -4,7 +4,7 @@ class TorresDeHanoi:
     def __init__(self, num_discos):
         self.num_discos = num_discos
         self.torres = {
-            'A': [NodoHanoi(i) for i in range(num_discos, 0, -1)],
+            'A': [NodoHanoi(i, 'A', None) for i in range(num_discos, 0, -1)],
             'B': [],
             'C': []
         }

@@ -1,5 +1,5 @@
 class NodoHanoi(object):
-    def __init__(self, disco, origen, destino, auxiliar):
+    def __init__(self, disco, origen=None, destino=None, auxiliar=None):
         self.disco = disco
         self.origen = origen
         self.destino = destino
