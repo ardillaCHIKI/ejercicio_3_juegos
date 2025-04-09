@@ -8,6 +8,14 @@ def resolver_n_reinas_con_nodos(n):
     raiz = NodoPolinomio([[0 for _ in range(n)] for _ in range(n)], 0)
     pila = [raiz]
 
+    def es_valido(estado, fila, col):
+        for i in range(fila):
+            if estado[i][col] == 1 or \
+                (col - (fila - i) >= 0 and estado[i][col - (fila - i)] == 1) or \
+                (col + (fila - i) < len(estado) and estado[i][col + (fila - i)] == 1):
+                return False
+        return True
+
     while pila:
         nodo_actual = pila.pop()
         if nodo_actual.nivel == n:
@@ -19,22 +27,14 @@ def resolver_n_reinas_con_nodos(n):
                 nuevo_estado[nodo_actual.nivel][col] = 1
                 pila.append(NodoPolinomio(nuevo_estado, nodo_actual.nivel + 1))
 
-        solucion = nodo_actual.estado
-        imprimir_solucion(solucion)
-        return solucion
-
-    def es_valido(estado, fila, col):
-        for i in range(fila):
-            if estado[i][col] == 1 or \
-               (col - (fila - i) >= 0 and estado[i][col - (fila - i)] == 1) or \
-               (col + (fila - i) < len(estado) and estado[i][col + (fila - i)] == 1):
-                return False
-        return True
-
     def imprimir_solucion(estado):
         print("Solución encontrada:")
         for fila in estado:
             print(" ".join("Q" if x == 1 else "." for x in fila))
+
+        solucion = nodo_actual.estado
+        imprimir_solucion(solucion)
+        return solucion
 
 if __name__ == "__main__":
     try:
