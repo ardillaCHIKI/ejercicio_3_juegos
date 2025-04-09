@@ -31,7 +31,7 @@ Donde `(x, y)` es la posición actual del caballo.
 3. Si no hay movimientos válidos y no se han visitado todas las casillas, retrocede al paso anterior.
 4. Repite hasta encontrar una solución o determinar que no existe.
 
-JUEGO DE LAS N-REINAS
+### JUEGO DE LAS N-REINAS
 Este proyecto implementa una solución al problema clásico de las n-reinas utilizando una estructura de nodos y un enfoque basado en pila (stack). El objetivo es colocar n reinas en un tablero de ajedrez de tamaño n x n de manera que ninguna reina se amenace entre sí (es decir, no compartan fila, columna ni diagonal).
 
 El programa está escrito en Python y permite al usuario ingresar el tamaño del tablero (n) a través de la terminal, mostrando una solución en formato textual si existe.
@@ -42,7 +42,7 @@ Usa una representación matricial del tablero (n x n) donde 1 indica la posició
 Muestra la solución en la consola con "Q" para reinas y "." para casillas vacías, junto con las posiciones (fila, columna) de las reinas.
 Maneja errores de entrada (valores no numéricos o negativos).
 
-TORRES DE HANOI
+### TORRES DE HANOI
 Este proyecto implementa una solución al problema clásico de las Torres de Hanoi en Python. El problema consiste en mover una pila de discos de diferentes tamaños desde una torre de origen (A) a una torre de destino (C), utilizando una torre auxiliar (B), siguiendo estas reglas:
 
 Solo se puede mover un disco a la vez.
