@@ -1,13 +1,17 @@
-from nodo.Nodo import Nodo  # Importar la clase Nodo desde el archivo Nodo.py
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from nodo.NodoPolinomio import NodoPolinomio  # Importar la clase NodoPolinomio
 
 def resolver_n_reinas_con_nodos(n):
-    raiz = Nodo([[0 for _ in range(n)] for _ in range(n)], 0)
+    raiz = NodoPolinomio([[0 for _ in range(n)] for _ in range(n)], 0)
     pila = [raiz]
 
     while pila:
         nodo_actual = pila.pop()
-        if nodo_actual.fila == n:
-            return nodo_actual.tablero
+        if nodo_actual.nivel == n:
+            return nodo_actual.estado
 
         nodo_actual.generar_hijos(n)
         pila.extend(nodo_actual.hijos)
@@ -26,3 +30,6 @@ def n_reinas():
             print(0)
     except ValueError:
         print("Por favor, introduce un número válido.")
+
+if __name__ == "__main__":
+    n_reinas()
