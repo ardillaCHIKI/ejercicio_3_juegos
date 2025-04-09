@@ -24,7 +24,7 @@ class TableroCaballo:
     def resolver(self, x_inicial, y_inicial):
         # Coloca el primer movimiento
         self.tablero[x_inicial][y_inicial] = 0
-        self.recorrido.append(Nodo(x_inicial, y_inicial, 0))
+        self.recorrido.append(Nodo.create_with_movement(x_inicial, y_inicial, 0))
         
         # Intenta resolver desde la posición inicial
         if self.resolver_util(x_inicial, y_inicial, 1):
@@ -39,21 +39,21 @@ class TableroCaballo:
 
         # Prueba todos los posibles movimientos
         for i in range(8):
-            nuevo_x = x + self.movimientos_x[i]
-            nuevo_y = y + self.movimientos_y[i]
+                nuevo_x = x + self.movimientos_x[i]
+                nuevo_y = y + self.movimientos_y[i]
+                
+                if self.es_valido(nuevo_x, nuevo_y):
+                    self.tablero[nuevo_x][nuevo_y] = movimiento_actual
+                    nuevo_nodo = Nodo.create_with_movement(nuevo_x, nuevo_y, movimiento_actual)
+                    self.recorrido.append(nuevo_nodo)
+                    
+                    if self.resolver_util(nuevo_x, nuevo_y, movimiento_actual + 1):
+                        return True
+                    
+                    # Backtracking: si no funciona, deshacemos el movimiento
+                    self.tablero[nuevo_x][nuevo_y] = -1
+                    self.recorrido.pop()
             
-            if self.es_valido(nuevo_x, nuevo_y):
-                self.tablero[nuevo_x][nuevo_y] = movimiento_actual
-                nuevo_nodo = Nodo(nuevo_x, nuevo_y, movimiento_actual)
-                self.recorrido.append(nuevo_nodo)
-                
-                if self.resolver_util(nuevo_x, nuevo_y, movimiento_actual + 1):
-                    return True
-                
-                # Backtracking: si no funciona, deshacemos el movimiento
-                self.tablero[nuevo_x][nuevo_y] = -1
-                self.recorrido.pop()
-        
         return False
 
     def imprimir_tablero(self):
@@ -92,5 +92,7 @@ def ProblemaCaballo():
     else:
         print("No se encontró solución desde la posición inicial")
 
-        if __name__ == "__main__":
-            ProblemaCaballo()
+
+
+if __name__ == "__main__":
+    ProblemaCaballo()
