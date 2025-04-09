@@ -1,8 +1,5 @@
-import sys
-import os
 import random
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from nodo.NodoPoliCaballo import NodoPoliCaballo
+from nodo.NodoPoliCaballo import NodoCaballo
 
 class TableroCaballo:
     def __init__(self, n):
@@ -22,7 +19,7 @@ class TableroCaballo:
         print(f"Posición inicial aleatoria: ({x_inicial}, {y_inicial})")
 
         self.tablero[x_inicial][y_inicial] = 0
-        self.recorrido.append(NodoPoliCaballo.create_with_movement(x_inicial, y_inicial, 0))
+        self.recorrido.append(NodoCaballo.create_with_movement(x_inicial, y_inicial, 0))
 
         if self.resolver_util(x_inicial, y_inicial, 1):
             self.solucion_encontrada = True
@@ -39,7 +36,7 @@ class TableroCaballo:
 
             if self.es_valido(nuevo_x, nuevo_y):
                 self.tablero[nuevo_x][nuevo_y] = movimiento_actual
-                nuevo_nodo = NodoPoliCaballo.create_with_movement(nuevo_x, nuevo_y, movimiento_actual)
+                nuevo_nodo = NodoCaballo.create_with_movement(nuevo_x, nuevo_y, movimiento_actual)
                 self.recorrido.append(nuevo_nodo)
 
                 if self.resolver_util(nuevo_x, nuevo_y, movimiento_actual + 1):
@@ -81,5 +78,4 @@ class ProblemaCaballo:
         caballo.imprimir_vectores()
     else:
         print("No se encontró solución desde la posición inicial aleatoria")
-
 
