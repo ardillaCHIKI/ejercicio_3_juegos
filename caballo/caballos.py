@@ -1,4 +1,5 @@
 import random
+from abc import ABC, abstractmethod 
 from nodo.Nodo import Nodo
 
 class Caballo(Nodo):
