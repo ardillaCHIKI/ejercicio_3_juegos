@@ -27,25 +27,30 @@ def resolver_n_reinas_con_nodos(n):
                 nuevo_estado[nodo_actual.nivel][col] = 1
                 pila.append(NodoPolinomio(nuevo_estado, nodo_actual.nivel + 1))
 
-    def imprimir_solucion(estado):
-        print("Solución encontrada:")
-        for fila in estado:
-            print(" ".join("Q" if x == 1 else "." for x in fila))
+    return None  # Si no se encuentra solución, devolver None
 
-        solucion = nodo_actual.estado
-        imprimir_solucion(solucion)
-        return solucion
+def imprimir_solucion(estado):
+    print("Solución encontrada:")
+    posiciones = []
+    for i, fila in enumerate(estado):
+        for j, valor in enumerate(fila):
+            if valor == 1:
+                posiciones.append((i, j))
+        print(" ".join("Q" if x == 1 else "." for x in fila))
+    print(f"Posiciones de las reinas: {posiciones}")
+    return posiciones
 
-if __name__ == "__main__":
+class JuegoReinas:
     try:
-        n = int(input("Introduce el número de reinas: "))
+        n = int(input("Introduce el número de reinas (y tamaño del tablero): "))
         if n <= 0:
             print("El número de reinas debe ser mayor que 0.")
         else:
             solucion = resolver_n_reinas_con_nodos(n)
-        if solucion:
-            print("Se encontró una solución.")
-        else:
-            print("No se encontró solución.")
+            if solucion:
+                posiciones = imprimir_solucion(solucion)
+                print(f"Las posiciones de las reinas son: {posiciones}")
+            else:
+                print("No se encontró solución.")
     except ValueError:
         print("Por favor, introduce un número entero válido.")
