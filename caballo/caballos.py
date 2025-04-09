@@ -1,4 +1,8 @@
+import sys
+import os
 import random
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from abc import ABC, abstractmethod 
 from nodo.Nodo import Nodo
 
@@ -62,21 +66,31 @@ class TableroCaballo:
         for nodo in self.recorrido:
             print(f"Movimiento {nodo.movimiento}: ({nodo.x}, {nodo.y})")
 
+    def imprimir_vectores(self):
+        print("\nVectores de posición del caballo:")
+        for i in range(1, len(self.recorrido)):
+            x1, y1 = self.recorrido[i - 1].x, self.recorrido[i - 1].y
+            x2, y2 = self.recorrido[i].x, self.recorrido[i].y
+            vector = (x2 - x1, y2 - y1)
+            print(f"Vector {i}: {vector}")
+
 # Función principal para probar el código
-def CABALLO():
+def ProblemaCaballo():
     tamaño = 8  # Tablero 8x8
     caballo = TableroCaballo(tamaño)
     
-    # Posición inicial (esquina superior izquierda)
-    x_inicial, y_inicial = 0, 0
+    # Posición inicial aleatoria
+    x_inicial = random.randint(0, tamaño - 1)
+    y_inicial = random.randint(0, tamaño - 1)
     
     print(f"Intentando resolver el problema del caballo desde ({x_inicial}, {y_inicial})")
     
     if caballo.resolver(x_inicial, y_inicial):
         caballo.imprimir_tablero()
         caballo.imprimir_recorrido()
+        caballo.imprimir_vectores()
     else:
         print("No se encontró solución desde la posición inicial")
 
-if __name__ == "__main__":
-    CABALLO()
+        if __name__ == "__main__":
+            ProblemaCaballo()
